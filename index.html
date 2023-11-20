@@ -6,7 +6,9 @@
     <title>Registration Page</title>
     <style>
         body {
-            font-family: Arial, sans-serial;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -26,7 +28,7 @@
         label {
             display: block;
             margin-bottom: 8px;
-            color: #333;
+            color: #333; /* Label color */
         }
 
         input, select, button {
@@ -37,24 +39,26 @@
             border-radius: 4px;
             box-sizing: border-box;
         }
+
+        /* Custom colors for each input */
         #name {
-            border-color: #3498db;
+            border-color: #3498db; /* Blue color */
         }
 
         #email {
-            border-color: #e74c3c;
+            border-color: #e74c3c; /* Red color */
         }
 
         #password {
-            border-color: #2ecc71;
+            border-color: #2ecc71; /* Green color */
         }
 
         #dob {
-            border-color: #f39c12;
+            border-color: #f39c12; /* Orange color */
         }
 
         #acceptTerms {
-            border-color: #9b59b6; 
+            border-color: #9b59b6; /* Purple color */
         }
 
         button {
@@ -64,6 +68,19 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            border: 1px solid #ccc;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
         }
     </style>
 </head>
@@ -84,7 +101,50 @@
         <label for="acceptTerms">Accept Terms?</label>
         <input type="checkbox" id="acceptTerms" name="acceptTerms">
 
-        <button type="submit">Register</button>
+        <button type="button" onclick="submitForm()">Register</button>
     </form>
+
+    <table id="userData">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Dob</th>
+                <th>Accepted terms?</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>
+        function submitForm() {
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+            var dob = document.getElementById('dob').value;
+            var acceptTerms = document.getElementById('acceptTerms').checked;
+
+            var table = document.getElementById('userData').getElementsByTagName('tbody')[0];
+            var newRow = table.insertRow(table.rows.length);
+            var cell1 = newRow.insertCell(0);
+            var cell2 = newRow.insertCell(1);
+            var cell3 = newRow.insertCell(2);
+            var cell4 = newRow.insertCell(3);
+            var cell5 = newRow.insertCell(4);
+
+            cell1.innerHTML = name;
+            cell2.innerHTML = email;
+            cell3.innerHTML = password;
+            cell4.innerHTML = dob;
+            cell5.innerHTML = acceptTerms ? 'Yes' : 'No';
+            document.getElementById('name').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('password').value = '';
+            document.getElementById('dob').value = '';
+            document.getElementById('acceptTerms').checked = false;
+        }
+    </script>
 </body>
 </html>
